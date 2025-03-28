@@ -37,3 +37,75 @@ function filterProducts() {
     let selectedCategory = document.getElementById("filter").value;
     showCategory(selectedCategory);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const cart = [];
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", () => {
+            const name = button.getAttribute("data-name");
+            const price = parseFloat(button.getAttribute("data-price"));
+
+            cart.push({ name, price });
+            updateCart();
+        });
+    });
+
+    function updateCart() {
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        cart.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+            cartItems.appendChild(li);
+            total += item.price;
+        });
+
+        cartTotal.textContent = total.toFixed(2);
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || []; // Load saved cart
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+
+    function updateCart() {
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const li = document.createElement("li");
+            li.innerHTML = `${item.name} - $${item.price.toFixed(2)} 
+            <button class="remove-item" data-index="${index}">❌</button>`;
+            cartItems.appendChild(li);
+            total += item.price;
+        });
+
+        cartTotal.textContent = total.toFixed(2);
+        localStorage.setItem("cart", JSON.stringify(cart)); // Save cart
+    }
+
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+        button.addEventListener("click", () => {
+            const name = button.getAttribute("data-name");
+            const price = parseFloat(button.getAttribute("data-price"));
+
+            cart.push({ name, price });
+            updateCart();
+        });
+    });
+
+    cartItems.addEventListener("click", (event) => {
+        if (event.target.classList.contains("remove-item")) {
+            const index = event.target.getAttribute("data-index");
+            cart.splice(index, 1);
+            updateCart();
+        }
+    });
+
+    updateCart(); // Load saved cart
+});

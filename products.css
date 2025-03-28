@@ -173,6 +173,15 @@ nav ul li a:hover {
     }
 }
 
+/* Marquee Section */
+.marquee-container {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 /* Product Grid */
 .product-grid {
     display: grid;
