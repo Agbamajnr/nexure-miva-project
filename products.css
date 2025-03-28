@@ -20,6 +20,7 @@ body {
     padding: 20px;
     position: fixed;
     transition: left 0.3s ease-in-out;
+    z-index: 999; /* Ensure sidebar is below nav */
 }
 
 .sidebar h2 {
@@ -41,6 +42,7 @@ body {
     display: block;
     padding: 10px;
     transition: background 0.3s, transform 0.2s;
+    pointer-events: auto; /* Ensure links are clickable */
 }
 
 .sidebar ul li a:hover {
@@ -66,7 +68,7 @@ body {
 /* Toggle Button */
 .toggle-sidebar {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 15px;
     left: 15px;
     background-color: #222;
@@ -87,12 +89,6 @@ body {
 /* Main Content */
 .main-content {
     margin-left: 250px;
-    padding: 20px;
-    width: calc(100% - 250px);
-}
-/* ===== Adjust Main Content to Avoid Overlap ===== */
-.main-content {
-    margin-left: 250px;
     padding: 120px 20px 20px; /* Increased top padding */
     width: calc(100% - 250px);
 }
@@ -105,7 +101,7 @@ body {
     }
 }
 
-/* ====== NAVIGATION BAR STYLING ====== */
+/* Navigation Bar Styling */
 header {
     background: linear-gradient(90deg, #222, #444);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
@@ -114,7 +110,7 @@ header {
     width: 100%;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 nav ul {
@@ -123,6 +119,8 @@ nav ul {
     align-items: center;
     gap: 30px;
     list-style: none;
+    position: relative;
+    z-index: 1000; /* Ensure navigation is on top */
 }
 
 nav ul li {
@@ -137,6 +135,7 @@ nav ul li a {
     padding: 10px 15px;
     border-radius: 5px;
     transition: background 0.3s ease-in-out, transform 0.2s;
+    pointer-events: auto; /* Ensure navigation links are clickable */
 }
 
 nav ul li a:hover {
@@ -169,7 +168,7 @@ nav ul li a:hover {
     }
 
     header {
-        position: relative;
+        position: fixed;
     }
 }
 
@@ -182,6 +181,7 @@ nav ul li a:hover {
     font-weight: bold;
     margin-bottom: 20px;
 }
+
 /* Product Grid */
 .product-grid {
     display: grid;
@@ -203,6 +203,7 @@ nav ul li a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer; /* Make product cards clickable */
 }
 
 /* Product Image */
@@ -241,4 +242,3 @@ footer {
     max-width: 900px;
     margin: auto;
 }
-
